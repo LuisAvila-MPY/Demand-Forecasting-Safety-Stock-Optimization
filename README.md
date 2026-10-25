@@ -159,14 +159,14 @@ Avaliação de Desempenho (Período de Validação 2023)
 
 Arquitetura da Solução e Pipeline
 flowchart LR
-    A[ Base de Dados Bruta\nretail_sales.csv] --> B[ Processamento & Agregação\nPandas / Python]
-    B --> C[ Classificação Matriz\nABC / XYZ]
-    B --> D[ Cálculo de SS & ROP\nEstoque de Segurança]
-    B --> E[ Modelagem Holt-Winters\nStatsmodels]
+    A[ Base de Dados Bruta \ retail_sales.csv] --> B[ Processamento & Agregação \ Pandas / Python]
+    B --> C[ Classificação Matriz \ ABC / XYZ]
+    B --> D[ Cálculo de SS & ROP \ Estoque de Segurança]
+    B --> E[ Modelagem Holt-Winters \ Statsmodels]
     C --> F[ abc_xyz_classification.csv]
     D --> G[ dim_products_inventory.csv]
     E --> H[ fact_weekly_demand_forecast.csv]
-    F --> I[ Dashboard Interativo\nPower BI / Excel]
+    F --> I[ Dashboard Interativo Excel]
     G --> I
     H --> I
 ```
@@ -201,32 +201,82 @@ Demand-Forecasting-Safety-Stock/
 
 ```
 
+##  Dashboard Interativo S&OP
+
+O painel analítico permite o controle estratégico dos indicadores de inventário e planejamento preditivo por meio de visões consolidadas e segmentadas por curva de produto.
+
+### 1. Visão Geral Consolidada
+Apresenta o balanço geral do portfólio, integrando a receita acumulada por categoria da matriz ABC/XYZ, a tendência sazonal de vendas projetadas para 2024 e o comparativo dos parâmetros de estoque (SS, ROP e Lead Time).
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6c8595e2-ecc1-4e39-bc2e-5ba5feb0e73e" alt="S&OP & Supply Chain Analytics Dashboard - Visão Geral" width="95%">
+  <br>
+  <em>Figura 1: Visão Geral do S&OP & Supply Chain Analytics Dashboard apresentando KPIs, Matriz ABC/XYZ, Curva Preditiva para 2024 e Níveis de Estoque por Classe.</em>
+</p>
+
+---
+
+### 2. Análise Detalhada por Categoria de Produto (Drill-down)
+
+#### 🔹 Classe A / Categoria AY (Produtos de Altíssimo Faturamento)
+Composta por **33 SKUs** que concentram **R$ 5,68 Bilhões** (80% da receita total). Exigem nível de serviço rigoroso de **95%**, mantendo um Estoque de Segurança médio de **52 unidades** e Ponto de Encomenda de **302 unidades** para cobrir um Lead Time curto de **7 dias**.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cd255624-48f6-4cef-a382-e3ee79b13c71" alt="Dashboard Filtrado na Categoria AY (Classe A)" width="90%">
+  <br>
+  <em>Figura 2: Filtro analítico aplicado aos SKUs Classe AY (Alto Faturamento / Variabilidade Moderada).</em>
+</p>
+
+---
+
+#### 🔹 Classes B e C / Categorias BY e CY (Médio e Baixo Impacto)
+Compreendem os **17 SKUs** restantes (11 BY e 6 CY) responsáveis por **R$ 1,42 Bilhão** em vendas. Com Lead Times maiores (10 e 14 dias), os ROPs médios são ajustados para **215 unidades (Classe B)** e **217 unidades (Classe C)**, otimizando o custo de estocagem sem comprometer a demanda secundária.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d3d17057-7de1-47fd-aa09-998313a9843c" alt="Dashboard Filtrado nas Categorias BY e CY (Classes B e C)" width="90%">
+  <br>
+  <em>Figura 3: Filtro analítico aplicado aos SKUs das Categorias BY e CY (Médio e Baixo Impacto Financeiro).</em>
+</p>
+
+---
+
+##  Modelagem de Dados Relacional
+
+A arquitetura do modelo de dados adota uma estrutura otimizada conectando tabelas dimensionais e de fatos operacionais:
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5a0ffc1b-d451-4e2d-9941-b1939ae73056" alt="Esquema Relacional do Modelo de Dados" width="85%">
+  <br>
+  <em>Figura 4: Diagrama de Relacionamentos entre as tabelas `abc_xyz_classification`, `dim_products_inventory` e a fato de previsão temporal `fact_weekly_demand_forecast`.</em>
+</p>
+
+
 Como Executar
 1. Clonar o Repositório
 git clone [https://github.com/LuisAvila-MPY/Demand-Forecasting-Safety-Stock.git](https://github.com/LuisAvila-MPY/Demand-Forecasting-Safety-Stock.git)
 cd Demand-Forecasting-Safety-Stock
 
 2. Configurar o Ambiente Virtual
-# Criar o ambiente
+- Criar o ambiente
 python -m venv venv
 
-# Ativar no Linux/macOS:
+- Ativar no Linux/macOS:
 source venv/bin/activate
 
-# Ativar no Windows:
+- Ativar no Windows:
 venv\Scripts\activate
 
 3. Instalar as Dependências
 pip install -r requirements.txt
 
 4. Executar os Scripts da Aplicação
-# Executa a limpeza de dados e gera a classificação ABC/XYZ
+- Executa a limpeza de dados e gera a classificação ABC/XYZ
 python 03_src/data_processing.py
 
-# Calcula o Estoque de Segurança e ROP
+- Calcula o Estoque de Segurança e ROP
 python 03_src/inventory.py
 
-# Treina o modelo Holt-Winters e exporta as previsões de 2024
+- Treina o modelo Holt-Winters e exporta as previsões de 2024
 python 03_src/forecasting.py
 
 

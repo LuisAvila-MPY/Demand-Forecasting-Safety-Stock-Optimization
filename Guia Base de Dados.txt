@@ -1,0 +1,53 @@
+===============================================================================
+  GUIA DE OBTENÇÃO E CONFIGURAÇÃO DA BASE DE DADOS (STORE ITEM DEMAND FORECASTING)
+===============================================================================
+
+Este projeto utiliza o conjunto de dados "Store Item Demand Forecasting Dataset",
+composto por mais de 4,5 milhões de registros diários de vendas.
+
+Devido ao limite de tamanho de arquivos do GitHub (máximo de 25MB via interface 
+web e 100MB via Git CLI), o arquivo CSV de dados brutos não é armazenado diretamente 
+no repositório. Siga as instruções abaixo para obter e posicionar a base localmente.
+
+-------------------------------------------------------------------------------
+PASSO A PASSO PARA BAIXAR E CONFIGURAR
+-------------------------------------------------------------------------------
+
+1. ACESSAR O LINK DO DATASET NO KAGGLE:
+   Acesse a página oficial do conjunto de dados:
+   https://www.kaggle.com/datasets/dhrubangtalukdar/store-item-demand-forecasting-dataset
+
+2. FAZER O DOWNLOAD DOS DADOS:
+   - Faça login na sua conta do Kaggle (se não tiver uma, crie gratuitamente).
+   - Clique no botão "Download" (ícone de seta/baixar no canto superior direito).
+   - O arquivo será baixado como um arquivo compactado (ex: `archive.zip` ou `train.csv.zip`).
+
+3. EXTRAIR E PREPARAR O ARQUIVO:
+   - Extraia o conteúdo do arquivo ZIP baixado.
+   - Localize o arquivo principal de vendas (geralmente nomeado como `train.csv` ou `retail_sales.csv`).
+   - Caso o nome seja `train.csv`, renomeie-o para `retail_sales.csv` para manter a compatibilidade com os scripts do projeto.
+
+4. MOVER PARA A ESTRUTURA DO PROJETO:
+   - Navegue até a pasta do seu repositório local.
+   - Mova o arquivo `retail_sales.csv` para o seguinte diretório:
+     `Demand-Forecasting-Safety-Stock/01_data/raw/retail_sales.csv`
+
+5. CONFIGURAÇÃO DO .GITIGNORE (PREVENÇÃO DE ERROS NO GIT):
+   Para garantir que o Git não tente enviar esse arquivo pesado para o GitHub nas atualizações futuras:
+   - Abra (ou crie) o arquivo `.gitignore` na raiz do repositório.
+   - Adicione a seguinte linha no arquivo `.gitignore`:
+     `01_data/raw/*.csv`
+
+-------------------------------------------------------------------------------
+MÉTODO ALTERNATIVO: DOWNLOAD VIA KAGGLE API (OPCIONAL/TERMINAL)
+-------------------------------------------------------------------------------
+
+Caso prefira baixar diretamente pelo terminal utilizando a CLI do Kaggle:
+
+1. Instale o pacote da API do Kaggle:
+   pip install kaggle
+
+2. Baixe o dataset diretamente no diretório do projeto:
+   kaggle datasets download -d dhrubangtalukdar/store-item-demand-forecasting-dataset -p 01_data/raw/ --unzip
+
+===============================================================================

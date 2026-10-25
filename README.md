@@ -2,7 +2,7 @@
 Este repositório contém uma solução completa (end-to-end) de Supply Chain &amp; Data Science para planejamento de demanda e otimização de níveis de estoque no varejo. A partir de um conjunto de dados históricos contendo 4.565.000 registros de vendas diárias, período de 2019 a 2023, abrangendo 50 lojas e 50 SKUs.
 
 <h1 align="center">
-  📦 Demand Forecasting & Safety Stock Optimization
+   Demand Forecasting & Safety Stock Optimization
 </h1>
 
 <p align="center">
@@ -34,7 +34,7 @@ Este repositório contém uma solução completa (end-to-end) de Supply Chain &a
 
 ---
 
-## 🏬 Visão Geral e Contexto de Negócio
+##  Visão Geral e Contexto de Negócio
 
 No setor varejista multi-loja, o equilíbrio entre **disponibilidade de produto** e **eficiência do capital de giro** é um dos maiores desafios operacionais. A ocorrência de rupturas de estoque (*stockouts*) gera perda direta de receita e insatisfação do cliente, enquanto o excesso de estoque (*overstocking*) imobiliza capital financeiro e aumenta os custos de armazenagem e obsolescência.
 
@@ -46,32 +46,32 @@ Este projeto implementa uma solução **End-to-End de Supply Chain & Data Scienc
 
 ---
 
-## 📊 Indicadores Chave (KPIs)
+##  Indicadores Chave (KPIs)
 
 <table align="center">
   <tr>
     <td align="center" width="25%">
       <b>Volume Total Vendido</b><br>
       <sub>(2019 - 2023)</sub><br>
-      <h2>📦 133,59M</h2>
+      <h2> 133,59M</h2>
       <sub>Unidades comercializadas</sub>
     </td>
     <td align="center" width="25%">
       <b>Faturamento Acumulado</b><br>
       <sub>(2019 - 2023)</sub><br>
-      <h2>💰 R$ 7,107B</h2>
+      <h2> R$ 7,107B</h2>
       <sub>Receita bruta total</sub>
     </td>
     <td align="center" width="25%">
       <b>Acurácia Preditiva</b><br>
       <sub>Validação 2023</sub><br>
-      <h2>🎯 92,45%</h2>
+      <h2> 92,45%</h2>
       <sub>Modelo Holt-Winters</sub>
     </td>
     <td align="center" width="25%">
       <b>Erro Médio (MAPE)</b><br>
       <sub>Desvio Percentual</sub><br>
-      <h2>📉 7,55%</h2>
+      <h2> 7,55%</h2>
       <sub>Erro percentual absoluto</sub>
     </td>
   </tr>
@@ -79,7 +79,7 @@ Este projeto implementa uma solução **End-to-End de Supply Chain & Data Scienc
 
 ---
 
-## 🎯 Classificação Estratégica: Matriz ABC/XYZ
+##  Classificação Estratégica: Matriz ABC/XYZ
 
 A matriz **ABC/XYZ** cruza a **representatividade no faturamento** com a **predictibilidade/volatilidade da demanda** por SKU.
 
@@ -105,7 +105,7 @@ A matriz **ABC/XYZ** cruza a **representatividade no faturamento** com a **predi
 
 ---
 
-## 🛡️ Dimensionamento de Estoque (SS & ROP)
+##  Dimensionamento de Estoque (SS & ROP)
 
 Para mitigar rupturas operacionais sem sobrecarregar os armazéns, foi aplicada a modelagem estatística de **Estoque de Segurança (Safety Stock)** e **Ponto de Encomenda (Reorder Point)**:
 
@@ -131,11 +131,11 @@ Onde:
 
 ---
 
-## 🔮 Modelagem Preditiva (Demand Forecasting)
+##  Modelagem Preditiva (Demand Forecasting)
 
 Para a projeção temporal da demanda semanal, utilizou-se o modelo **Holt-Winters Aditivo** (`ExponentialSmoothing`), ideal para séries com tendência linear e padrões sazonais marcados.
 
-```python
+```python 
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 
 # Treinamento do Modelo Holt-Winters
@@ -159,18 +159,20 @@ Avaliação de Desempenho (Período de Validação 2023)
 
 Arquitetura da Solução e Pipeline
 flowchart LR
-    A[📂 Base de Dados Bruta\nretail_sales.csv] --> B[🧹 Processamento & Agregação\nPandas / Python]
-    B --> C[📊 Classificação Matriz\nABC / XYZ]
-    B --> D[⚙️ Cálculo de SS & ROP\nEstoque de Segurança]
-    B --> E[🤖 Modelagem Holt-Winters\nStatsmodels]
-    C --> F[📄 abc_xyz_classification.csv]
-    D --> G[📄 dim_products_inventory.csv]
-    E --> H[📄 fact_weekly_demand_forecast.csv]
-    F --> I[📊 Dashboard Interativo\nPower BI / Excel]
+    A[ Base de Dados Bruta\nretail_sales.csv] --> B[ Processamento & Agregação\nPandas / Python]
+    B --> C[ Classificação Matriz\nABC / XYZ]
+    B --> D[ Cálculo de SS & ROP\nEstoque de Segurança]
+    B --> E[ Modelagem Holt-Winters\nStatsmodels]
+    C --> F[ abc_xyz_classification.csv]
+    D --> G[ dim_products_inventory.csv]
+    E --> H[ fact_weekly_demand_forecast.csv]
+    F --> I[ Dashboard Interativo\nPower BI / Excel]
     G --> I
     H --> I
-
+```
 Estrutura do Repositório
+
+```
 Demand-Forecasting-Safety-Stock/
 ├── 01_data/
 │   ├── raw/
@@ -196,6 +198,8 @@ Demand-Forecasting-Safety-Stock/
     │   └── dashboard_overview.png                   # Capturas de tela do painel
     ├── dashboard_demand_safety_stock.pbix           # Relatório executivo interativo
     └── README.md                                    # Documentação do projeto
+
+```
 
 Como Executar
 1. Clonar o Repositório
@@ -226,4 +230,8 @@ python 03_src/inventory.py
 python 03_src/forecasting.py
 
 
-Autor: Luis Gustavo Ávila da Silva
+Autor
+  - Luis Gustavo Ávila da Silva
+
+[Linkedin] https://www.linkedin.com/in/luis-%C3%A1vila-25687134b/ | [Github] LuisAvila-MPY
+ | [Currículo Lattes](https://lattes.cnpq.br/9470197971678821)
